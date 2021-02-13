@@ -3,6 +3,7 @@ package br.com.lucas.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.sun.istack.NotNull;
 
 
@@ -60,13 +62,13 @@ public class Acao implements Serializable{
 	
 	@Column(name = "entrada")
 	@JsonProperty("entrada")
-	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-	private LocalDateTime entrada;
+	@JsonFormat(pattern = "HH:mm:ss")
+	private LocalTime entrada;
 	
 	@Column(name = "saida")
 	@JsonProperty("saida")
-	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-	private LocalDateTime saida;
+	@JsonFormat(pattern = "HH:mm:ss")	
+	private LocalTime saida;
 	
 	@Column(name = "agencia")
 	@JsonProperty("agencia")
@@ -89,8 +91,8 @@ public class Acao implements Serializable{
 	}
 
 	public Acao(Long id, String programa, LocalDate data, String cliente, Long idCliente, String produto,
-			String tipoAcao, String descricao, LocalDateTime entrada, LocalDateTime saida, String agencia,
-			Long numeroVideo, Long idAgencia, Long idSistema) {
+			String tipoAcao, String descricao, LocalTime entrada, LocalTime saida, String agencia, Long numeroVideo,
+			Long idAgencia, Long idSistema) {
 		super();
 		this.id = id;
 		this.programa = programa;
@@ -180,19 +182,19 @@ public class Acao implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public LocalDateTime getEntrada() {
+	public LocalTime getEntrada() {
 		return entrada;
 	}
 
-	public void setEntrada(LocalDateTime entrada) {
+	public void setEntrada(LocalTime entrada) {
 		this.entrada = entrada;
 	}
 
-	public LocalDateTime getSaida() {
+	public LocalTime getSaida() {
 		return saida;
 	}
 
-	public void setSaida(LocalDateTime saida) {
+	public void setSaida(LocalTime saida) {
 		this.saida = saida;
 	}
 
@@ -233,8 +235,10 @@ public class Acao implements Serializable{
 	}
 
 	
+	
 
 	
+
 	
 
 }
