@@ -48,7 +48,7 @@ public class AgenciaController {
 		System.out.println("Agencia salva com sucesso!");
 	}
 	
-	@PutMapping("/clientes/{id}")
+	@PutMapping("/agencias/{id}")
 	public ResponseEntity<?> update(@RequestBody Agencia agencia,
 			@PathVariable Long id){
 		try {
@@ -61,7 +61,7 @@ public class AgenciaController {
 		}
 	}
 	
-	@DeleteMapping("/Agencias/{id}")
+	@DeleteMapping("/agencias/{id}")
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
 	}
