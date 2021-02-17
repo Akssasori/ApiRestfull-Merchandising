@@ -60,12 +60,12 @@ public class Acao implements Serializable {
 	@Column(name = "entrada")
 	@JsonProperty("entrada")
 	@JsonFormat(pattern = "HH:mm:ss")
-	private LocalTime entrada;
+	private LocalTime entrada = LocalTime.parse("00:00:00");
 
 	@Column(name = "saida")
 	@JsonProperty("saida")
 	@JsonFormat(pattern = "HH:mm:ss")
-	private LocalTime saida;
+	private LocalTime saida = LocalTime.parse("00:00:00");
 
 	@Column(name = "agencia")
 	@JsonProperty("agencia")
@@ -114,6 +114,16 @@ public class Acao implements Serializable {
 		this.url = url;
 		this.idAgencia = idAgencia;
 	}
+	
+//	public Acao posConstruct() {
+//		if (this.entrada <= this.saida) {
+//			
+//		} else {
+//
+//		} 
+//		
+//		return this;
+//	}
 
 	@Override
 	public String toString() {

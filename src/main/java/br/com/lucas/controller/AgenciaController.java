@@ -42,7 +42,7 @@ public class AgenciaController {
 		}
 	}
 	
-	@PostMapping
+	@PostMapping("/agencias")
 	public void add(@RequestBody Agencia agencia) {
 		service.save(agencia);
 		System.out.println("Agencia salva com sucesso!");
