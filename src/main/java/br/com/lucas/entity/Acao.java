@@ -1,6 +1,7 @@
 package br.com.lucas.entity;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -14,6 +15,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
+
+//import ch.qos.logback.core.util.Duration;
 
 @Entity
 @Table(name = "acao")
@@ -115,15 +118,19 @@ public class Acao implements Serializable {
 		this.idAgencia = idAgencia;
 	}
 	
-//	public Acao posConstruct() {
-//		if (this.entrada <= this.saida) {
-//			
-//		} else {
-//
-//		} 
-//		
-//		return this;
-//	}
+	public Acao calculoDiferenca() {
+		
+		LocalTime inicio = LocalTime.of(entrada.getHour(), entrada.getMinute(), entrada.getSecond());
+		LocalTime fim = LocalTime.of(saida.getHour(), saida.getMinute(), saida.getSecond());
+		
+		Duration duracao = Duration.between(inicio, fim);
+		long diff = duracao.toHours();
+		System.out.println(diff);
+		
+		
+		return this;
+		
+	}
 
 	@Override
 	public String toString() {
