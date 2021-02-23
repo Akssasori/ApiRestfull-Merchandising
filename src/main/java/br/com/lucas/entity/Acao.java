@@ -103,7 +103,7 @@ public class Acao implements Serializable {
 
 	public Acao(Long id, String programa, LocalDate data, String cliente, Long idCliente, String produto,
 			String tipoAcao, String descricao, LocalDateTime entrada, LocalDateTime saida, String agencia, String url,
-			Long idAgencia, LocalTime duracao) {
+			Long idAgencia) {
 		super();
 		this.id = id;
 		this.programa = programa;
@@ -118,21 +118,24 @@ public class Acao implements Serializable {
 		this.agencia = agencia;
 		this.url = url;
 		this.idAgencia = idAgencia;
-		this.duracao = duracao;
 	}
 
 //	@PrePersist
 	public Acao calculoDiferenca() {
-		
-		LocalDateTime inicio = LocalDateTime.of(entrada.getYear(), entrada.getMonth(), entrada.getDayOfMonth(), entrada.getHour(), entrada.getMinute(), entrada.getSecond());
-		LocalDateTime fim = LocalDateTime.of(saida.getYear(), saida.getMonth(), saida.getDayOfMonth(), saida.getHour(), saida.getMinute(), saida.getSecond());
+
+		LocalDateTime inicio = LocalDateTime.of(entrada.getYear(), entrada.getMonth(), entrada.getDayOfMonth(),
+				entrada.getHour(), entrada.getMinute(), entrada.getSecond());
+		LocalDateTime fim = LocalDateTime.of(saida.getYear(), saida.getMonth(), saida.getDayOfMonth(), saida.getHour(),
+				saida.getMinute(), saida.getSecond());
 //		LocalTime inicio = LocalTime.of(entrada.getHour(), entrada.getMinute(), entrada.getSecond());
 //		LocalTime fim = LocalTime.of(saida.getHour(), saida.getMinute(), saida.getSecond());
 
-		Duration duracao1 = Duration.between(inicio, fim);
-		long diff = (duracao1.toDays() + duracao1.toHours() + duracao1.toMinutes() + duracao1.toSeconds());
+		Duration duration = Duration.between(inicio, fim);
+//		long diff = (duracao1.toDays() + duracao1.toHours() + duracao1.toMinutes() + duracao1.toSeconds());
 //		LocalTime diff= inicio.of(inicio.getHour(), inicio.getMinute(), inicio.getSecond()) - fim.of(fim.getHour(), fim.getMinute(), fim.getSecond());
-		System.out.println(diff);
+//		System.out.println(diff);
+
+		System.out.println("Days between " + inicio + "e" + fim + ":" + duration.toHours());
 
 		return this;
 
