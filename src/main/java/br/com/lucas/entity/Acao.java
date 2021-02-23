@@ -134,7 +134,8 @@ public class Acao implements Serializable {
 //		long diff = (duracao1.toDays() + duracao1.toHours() + duracao1.toMinutes() + duracao1.toSeconds());
 //		LocalTime diff= inicio.of(inicio.getHour(), inicio.getMinute(), inicio.getSecond()) - fim.of(fim.getHour(), fim.getMinute(), fim.getSecond());
 //		System.out.println(diff);
-
+//		duracao = duration;
+		
 		System.out.println("Days between " + inicio + "e" + fim + ":" + duration.toHours());
 
 		return this;
