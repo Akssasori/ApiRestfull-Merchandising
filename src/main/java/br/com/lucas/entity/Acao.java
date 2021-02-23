@@ -3,6 +3,7 @@ package br.com.lucas.entity;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.Column;
@@ -62,13 +63,14 @@ public class Acao implements Serializable {
 
 	@Column(name = "entrada")
 	@JsonProperty("entrada")
-	@JsonFormat(pattern = "HH:mm:ss")
-	private LocalTime entrada; // = LocalTime.parse("00:00:00")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	private LocalDateTime entrada; // = LocalTime.parse("00:00:00")
 
 	@Column(name = "saida")
 	@JsonProperty("saida")
-	@JsonFormat(pattern = "HH:mm:ss")
-	private LocalTime saida; // = LocalTime.parse("00:00:00")
+//	@JsonFormat(pattern = "HH:mm:ss")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	private LocalDateTime saida; // = LocalTime.parse("00:00:00") private LocalTime saida;
 
 	@Column(name = "agencia")
 	@JsonProperty("agencia")
@@ -85,7 +87,7 @@ public class Acao implements Serializable {
 	@Column(name = "idAgencia")
 	@JsonProperty("idAgencia")
 	private Long idAgencia;
-	
+
 	@Column(name = "duracao")
 	@JsonProperty("duracao")
 	@JsonFormat(pattern = "HH:mm:ss")
@@ -99,43 +101,43 @@ public class Acao implements Serializable {
 
 	}
 
-	
-	
-	public Acao(Long id, String programa, LocalDate data, String cliente, Long idCliente, String produto, String tipoAcao,
-		String descricao, LocalTime entrada, LocalTime saida, String agencia, String url, Long idAgencia) {
-	super();
-	this.id = id;
-	this.programa = programa;
-	this.data = data;
-	this.cliente = cliente;
-	this.idCliente = idCliente;
-	this.produto = produto;
-	this.tipoAcao = tipoAcao;
-	this.descricao = descricao;
-	this.entrada = entrada;
-	this.saida = saida;
-	this.agencia = agencia;
-	this.url = url;
-	this.idAgencia = idAgencia;
-}
-
+	public Acao(Long id, String programa, LocalDate data, String cliente, Long idCliente, String produto,
+			String tipoAcao, String descricao, LocalDateTime entrada, LocalDateTime saida, String agencia, String url,
+			Long idAgencia, LocalTime duracao) {
+		super();
+		this.id = id;
+		this.programa = programa;
+		this.data = data;
+		this.cliente = cliente;
+		this.idCliente = idCliente;
+		this.produto = produto;
+		this.tipoAcao = tipoAcao;
+		this.descricao = descricao;
+		this.entrada = entrada;
+		this.saida = saida;
+		this.agencia = agencia;
+		this.url = url;
+		this.idAgencia = idAgencia;
+		this.duracao = duracao;
+	}
 
 //	@PrePersist
 	public Acao calculoDiferenca() {
 		
-		LocalTime inicio = LocalTime.of(entrada.getHour(), entrada.getMinute(), entrada.getSecond());
-		LocalTime fim = LocalTime.of(saida.getHour(), saida.getMinute(), saida.getSecond());
-		
-		Duration duracao = Duration.between(inicio, fim);
-		long diff = duracao.toHours();
+		LocalDateTime inicio = LocalDateTime.of(entrada.getYear(), entrada.getMonth(), entrada.getDayOfMonth(), entrada.getHour(), entrada.getMinute(), entrada.getSecond());
+		LocalDateTime fim = LocalDateTime.of(saida.getYear(), saida.getMonth(), saida.getDayOfMonth(), saida.getHour(), saida.getMinute(), saida.getSecond());
+//		LocalTime inicio = LocalTime.of(entrada.getHour(), entrada.getMinute(), entrada.getSecond());
+//		LocalTime fim = LocalTime.of(saida.getHour(), saida.getMinute(), saida.getSecond());
+
+		Duration duracao1 = Duration.between(inicio, fim);
+		long diff = (duracao1.toDays() + duracao1.toHours() + duracao1.toMinutes() + duracao1.toSeconds());
+//		LocalTime diff= inicio.of(inicio.getHour(), inicio.getMinute(), inicio.getSecond()) - fim.of(fim.getHour(), fim.getMinute(), fim.getSecond());
 		System.out.println(diff);
-		
-		
+
 		return this;
-		
+
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Acao [id=" + id + ", programa=" + programa + ", data=" + data + ", cliente=" + cliente + ", idCliente="
@@ -144,183 +146,121 @@ public class Acao implements Serializable {
 				+ idAgencia + ", duracao=" + duracao + "]";
 	}
 
-
-
-	
-	
 	public Long getId() {
 		return id;
 	}
-
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-
 	public String getPrograma() {
 		return programa;
 	}
-
-
 
 	public void setPrograma(String programa) {
 		this.programa = programa;
 	}
 
-
-
 	public LocalDate getData() {
 		return data;
 	}
-
-
 
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
-
-
 	public String getCliente() {
 		return cliente;
 	}
-
-
 
 	public void setCliente(String cliente) {
 		this.cliente = cliente;
 	}
 
-
-
 	public Long getIdCliente() {
 		return idCliente;
 	}
-
-
 
 	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
 	}
 
-
-
 	public String getProduto() {
 		return produto;
 	}
-
-
 
 	public void setProduto(String produto) {
 		this.produto = produto;
 	}
 
-
-
 	public String getTipoAcao() {
 		return tipoAcao;
 	}
-
-
 
 	public void setTipoAcao(String tipoAcao) {
 		this.tipoAcao = tipoAcao;
 	}
 
-
-
 	public String getDescricao() {
 		return descricao;
 	}
-
-
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
-
-
-	public LocalTime getEntrada() {
+	public LocalDateTime getEntrada() {
 		return entrada;
 	}
 
-
-
-	public void setEntrada(LocalTime entrada) {
+	public void setEntrada(LocalDateTime entrada) {
 		this.entrada = entrada;
 	}
 
-
-
-	public LocalTime getSaida() {
+	public LocalDateTime getSaida() {
 		return saida;
 	}
 
-
-
-	public void setSaida(LocalTime saida) {
+	public void setSaida(LocalDateTime saida) {
 		this.saida = saida;
 	}
-
-
 
 	public String getAgencia() {
 		return agencia;
 	}
 
-
-
 	public void setAgencia(String agencia) {
 		this.agencia = agencia;
 	}
-
-
 
 	public String getUrl() {
 		return url;
 	}
 
-
-
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
-
 
 	public Long getIdAgencia() {
 		return idAgencia;
 	}
 
-
-
 	public void setIdAgencia(Long idAgencia) {
 		this.idAgencia = idAgencia;
 	}
-
-
 
 	public LocalTime getDuracao() {
 		return duracao;
 	}
 
-
-
 	public void setDuracao(LocalTime duracao) {
 		this.duracao = duracao;
 	}
 
-
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-
 
 //	public static void main(String[] args) {
 //		try {
