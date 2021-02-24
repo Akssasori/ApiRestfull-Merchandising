@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -90,8 +90,9 @@ public class Acao implements Serializable {
 
 	@Column(name = "duracao")
 	@JsonProperty("duracao")
-	@JsonFormat(pattern = "HH:mm:ss")
-	private LocalTime duracao;
+//	@JsonFormat(pattern = "HH:mm:ss")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	private Duration duracao;
 
 //	@Column(name = "idSistema")
 //	@JsonProperty("idSistema")
@@ -120,13 +121,14 @@ public class Acao implements Serializable {
 		this.idAgencia = idAgencia;
 	}
 
-//	@PrePersist
+	@PrePersist
 	public Acao calculoDiferenca() {
 
 		LocalDateTime inicio = LocalDateTime.of(entrada.getYear(), entrada.getMonth(), entrada.getDayOfMonth(),
 				entrada.getHour(), entrada.getMinute(), entrada.getSecond());
 		LocalDateTime fim = LocalDateTime.of(saida.getYear(), saida.getMonth(), saida.getDayOfMonth(), saida.getHour(),
 				saida.getMinute(), saida.getSecond());
+		
 //		LocalTime inicio = LocalTime.of(entrada.getHour(), entrada.getMinute(), entrada.getSecond());
 //		LocalTime fim = LocalTime.of(saida.getHour(), saida.getMinute(), saida.getSecond());
 
@@ -134,9 +136,10 @@ public class Acao implements Serializable {
 //		long diff = (duracao1.toDays() + duracao1.toHours() + duracao1.toMinutes() + duracao1.toSeconds());
 //		LocalTime diff= inicio.of(inicio.getHour(), inicio.getMinute(), inicio.getSecond()) - fim.of(fim.getHour(), fim.getMinute(), fim.getSecond());
 //		System.out.println(diff);
-//		duracao = duration;
+		duracao = duration;
 		
-		System.out.println("Days between " + inicio + "e" + fim + ":" + duration.toHours());
+//		System.out.println("Days between " + inicio + "e" + fim + ":" + duration.toHours());
+		System.out.println(duracao);
 
 		return this;
 
@@ -254,17 +257,21 @@ public class Acao implements Serializable {
 		this.idAgencia = idAgencia;
 	}
 
-	public LocalTime getDuracao() {
+	public Duration getDuracao() {
 		return duracao;
 	}
 
-	public void setDuracao(LocalTime duracao) {
+	public void setDuracao(Duration duracao) {
 		this.duracao = duracao;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	
+
+	
 
 //	public static void main(String[] args) {
 //		try {
