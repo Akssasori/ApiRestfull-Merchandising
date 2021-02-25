@@ -8,6 +8,7 @@ public class ApiRestfullApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiRestfullApplication.class, args);
+		
 	}
 
 }
