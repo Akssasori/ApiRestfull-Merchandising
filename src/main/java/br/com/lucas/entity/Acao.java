@@ -130,19 +130,9 @@ public class Acao implements Serializable {
 
 		LocalDateTime stop = LocalDateTime.of(saida.getYear(), saida.getMonth(), saida.getDayOfMonth(), saida.getHour(),
 				saida.getMinute(), saida.getSecond());
-		
 
 		long diferencaSegundos = start.until(stop, ChronoUnit.SECONDS);
-		long diferencaDias = start.until(stop, ChronoUnit.DAYS);
-
-		long minutos = (diferencaSegundos / 60);
-		long horas = (minutos / 60);
-		long dias = (horas / 24);
-
-		System.out.println("teste " + dias + horas + minutos);
-		System.out.println();
-
-		if (diferencaDias == 0) {
+//		long diferencaDias = start.until(stop, ChronoUnit.DAYS);
 
 		long timeinsec = 0;
 		long timeinminaux = 0;
@@ -164,25 +154,37 @@ public class Acao implements Serializable {
 		}
 		timeinhr = (timeinminaux / 60);
 		diferencaSegundos = 0;
+		
 
-		System.out.println("O tempo é : " + timeinhr + ":" + timeinmin + ":" + timeinsec);
-		
-		int timehr = (int)timeinhr;
-		int timemin = (int)timeinmin;
-		int timesec = (int)timeinsec;
-		
-		LocalTime total = LocalTime.of(timehr, timemin, timesec);
-		duracao = total;
-		
-//		duracao = timeinhr + timeinmin + timeinsec;
-		
-		}else if(diferencaDias > 0) {
+//		if (diferencaDias == 0) {
+
+			System.out.println("O tempo é : " + timeinhr + ":" + timeinmin + ":" + timeinsec);
+
+			int timehr = (int) timeinhr;
+			int timemin = (int) timeinmin;
+			int timesec = (int) timeinsec;
+
+			LocalTime total = LocalTime.of(timehr, timemin, timesec);
+			duracao = total;
+
+//		}
+//		else if (diferencaDias > 0) {
+//			
+//			System.out.println("seu dia e maior que 0");
 			
-			System.out.println("seu dia e maior que 0");
-		}
+//			int timehr2 = (int) 24 - start.getHour() + stop.getHour();
+//			int timehr = timehr2;
+//			int timemin = (int) timeinmin;
+//			int timesec = (int) timeinsec;
+//			
+//			LocalTime total = LocalTime.of(timehr, timemin, timesec);
+//			duracao = total;
+			
+			
+
+//		}
 
 	}
-	
 
 	@Override
 	public String toString() {
@@ -315,6 +317,5 @@ public class Acao implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
 
 }
