@@ -1,9 +1,9 @@
 package br.com.lucas.entity;
 
 import java.io.Serializable;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 import javax.persistence.Column;
@@ -91,9 +91,8 @@ public class Acao implements Serializable {
 
 	@Column(name = "duracao")
 	@JsonProperty("duracao")
-//	@JsonFormat(pattern = "HH:mm:ss")
-//	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-	private Duration duracao;
+	@JsonFormat(pattern = "HH:mm:ss")
+	private LocalTime duracao;
 
 	@Column(name = "tvAberta")
 	@JsonProperty("tvAberta")
@@ -128,71 +127,62 @@ public class Acao implements Serializable {
 
 		LocalDateTime start = LocalDateTime.of(entrada.getYear(), entrada.getMonth(), entrada.getDayOfMonth(),
 				entrada.getHour(), entrada.getMinute(), entrada.getSecond());
-		
+
 		LocalDateTime stop = LocalDateTime.of(saida.getYear(), saida.getMonth(), saida.getDayOfMonth(), saida.getHour(),
 				saida.getMinute(), saida.getSecond());
 		
-		
-		long diferencaHoras = start.until(stop, ChronoUnit.HOURS);
-		long diferencaMinutos = start.until(stop, ChronoUnit.MINUTES);
-//		long diferencaMinutos = ChronoUnit.MINUTES.between(start, stop);
-//		long diferencaMinutos2 = diferencaMinutos / (60 * 1000);
+
 		long diferencaSegundos = start.until(stop, ChronoUnit.SECONDS);
-//		long diferencaMinutos2 = diferencaMinutos / (60 * 1000);
-		
-//		if(diferencaMinutos > 60) {
-//			diferencaMinutos = diferencaMinutos / (60 * 1000);
-//		}
+		long diferencaDias = start.until(stop, ChronoUnit.DAYS);
+
+		long minutos = (diferencaSegundos / 60);
+		long horas = (minutos / 60);
+		long dias = (horas / 24);
+
+		System.out.println("teste " + dias + horas + minutos);
+		System.out.println();
+
+		if (diferencaDias == 0) {
+
 		long timeinsec = 0;
 		long timeinminaux = 0;
 		long timeinhr = 0;
 		long timeinmin = 0;
-		
-		while (diferencaSegundos %60 !=0) {
-			diferencaSegundos = diferencaSegundos -1;
+
+		while (diferencaSegundos % 60 != 0) {
+			diferencaSegundos = diferencaSegundos - 1;
 			timeinsec = timeinsec + 1;
 		}
 		timeinminaux = (diferencaSegundos / 60);
 		diferencaSegundos = 0;
 
-		while(timeinminaux % 60 !=0) {
+		while (timeinminaux % 60 != 0) {
 
-		timeinminaux = timeinminaux - 1;
-		timeinmin = timeinmin + 1;
+			timeinminaux = timeinminaux - 1;
+			timeinmin = timeinmin + 1;
 
 		}
 		timeinhr = (timeinminaux / 60);
 		diferencaSegundos = 0;
 
 		System.out.println("O tempo é : " + timeinhr + ":" + timeinmin + ":" + timeinsec);
-
 		
+		int timehr = (int)timeinhr;
+		int timemin = (int)timeinmin;
+		int timesec = (int)timeinsec;
+		
+		LocalTime total = LocalTime.of(timehr, timemin, timesec);
+		duracao = total;
+		
+//		duracao = timeinhr + timeinmin + timeinsec;
+		
+		}else if(diferencaDias > 0) {
 			
-			
-		
-		
-		System.out.println("diferença de horas "+ diferencaHoras);
-		System.out.println("diferença de minutos "+ diferencaMinutos);
-		System.out.println("diferença de segundos "+ diferencaSegundos);
-		
-//		Duration duration = Duration.between(start, stop);
-		
-//		long diff = (duracao1.toDays() + duracao1.toHours() + duracao1.toMinutes() + duracao1.toSeconds());
-//		LocalTime diff= inicio.of(inicio.getHour(), inicio.getMinute(), inicio.getSecond()) - fim.of(fim.getHour(), fim.getMinute(), fim.getSecond());
-//		System.out.println(diff);
-//		duracao = duration;
-		
-//		System.out.println(duration);
-//		System.out.println("Days between " + start + "e" + stop + ":" + duration.toHours());
-
-		
+			System.out.println("seu dia e maior que 0");
+		}
 
 	}
-
-	public Long getId() {
-		return id;
-	}
-
+	
 
 	@Override
 	public String toString() {
@@ -200,6 +190,14 @@ public class Acao implements Serializable {
 				+ idCliente + ", produto=" + produto + ", tipoAcao=" + tipoAcao + ", descricao=" + descricao
 				+ ", entrada=" + entrada + ", saida=" + saida + ", agencia=" + agencia + ", url=" + url + ", idAgencia="
 				+ idAgencia + ", duracao=" + duracao + ", tvAberta=" + tvAberta + "]";
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getPrograma() {
@@ -298,6 +296,14 @@ public class Acao implements Serializable {
 		this.idAgencia = idAgencia;
 	}
 
+	public LocalTime getDuracao() {
+		return duracao;
+	}
+
+	public void setDuracao(LocalTime duracao) {
+		this.duracao = duracao;
+	}
+
 	public Boolean getTvAberta() {
 		return tvAberta;
 	}
@@ -308,18 +314,6 @@ public class Acao implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Duration getDuracao() {
-		return duracao;
-	}
-
-	public void setDuracao(Duration duracao) {
-		this.duracao = duracao;
 	}
 	
 
