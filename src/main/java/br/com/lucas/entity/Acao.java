@@ -132,14 +132,45 @@ public class Acao implements Serializable {
 		LocalDateTime stop = LocalDateTime.of(saida.getYear(), saida.getMonth(), saida.getDayOfMonth(), saida.getHour(),
 				saida.getMinute(), saida.getSecond());
 		
+		
 		long diferencaHoras = start.until(stop, ChronoUnit.HOURS);
 		long diferencaMinutos = start.until(stop, ChronoUnit.MINUTES);
+//		long diferencaMinutos = ChronoUnit.MINUTES.between(start, stop);
+//		long diferencaMinutos2 = diferencaMinutos / (60 * 1000);
 		long diferencaSegundos = start.until(stop, ChronoUnit.SECONDS);
 //		long diferencaMinutos2 = diferencaMinutos / (60 * 1000);
 		
-		if(diferencaMinutos > 60) {
-			diferencaMinutos = diferencaMinutos / (60 * 1000);
+//		if(diferencaMinutos > 60) {
+//			diferencaMinutos = diferencaMinutos / (60 * 1000);
+//		}
+		long timeinsec = 0;
+		long timeinminaux = 0;
+		long timeinhr = 0;
+		long timeinmin = 0;
+		
+		while (diferencaSegundos %60 !=0) {
+			diferencaSegundos = diferencaSegundos -1;
+			timeinsec = timeinsec + 1;
 		}
+		timeinminaux = (diferencaSegundos / 60);
+		diferencaSegundos = 0;
+
+		while(timeinminaux % 60 !=0) {
+
+		timeinminaux = timeinminaux - 1;
+		timeinmin = timeinmin + 1;
+
+		}
+		timeinhr = (timeinminaux / 60);
+		diferencaSegundos = 0;
+
+		System.out.println("O tempo é : " + timeinhr + ":" + timeinmin + ":" + timeinsec);
+
+		
+			
+			
+		
+		
 		System.out.println("diferença de horas "+ diferencaHoras);
 		System.out.println("diferença de minutos "+ diferencaMinutos);
 		System.out.println("diferença de segundos "+ diferencaSegundos);
