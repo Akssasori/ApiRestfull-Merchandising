@@ -156,7 +156,7 @@ public class Acao implements Serializable {
 		diferencaSegundos = 0;
 		
 
-//		if (diferencaDias == 0) { sera que foii
+//		if (diferencaDias == 0) { salvou
 
 			System.out.println("O tempo é : " + timeinhr + ":" + timeinmin + ":" + timeinsec);
 
