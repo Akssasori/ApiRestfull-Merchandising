@@ -24,28 +24,28 @@ public class Programa implements Serializable{
 	@JsonProperty("id")
 	private Long id;
 	
-	@Column(name = "idCliente")
-	@JsonProperty("idCliente")
-	private Long idCliente;
+	@Column(name = "idPrograma")
+	@JsonProperty("idPrograma")
+	private Long idPrograma;
 	
-	@Column(name = "cliente")
-	@JsonProperty("cliente")
-	private String cliente;
+	@Column(name = "programa")
+	@JsonProperty("programa")
+	private String programa;
 	
 	public Programa() {
 		
 	}
 
-	public Programa(Long id, Long idCliente, String cliente) {
+	public Programa(Long id, Long idPrograma, String programa) {
 		super();
 		this.id = id;
-		this.idCliente = idCliente;
-		this.cliente = cliente;
+		this.idPrograma = idPrograma;
+		this.programa = programa;
 	}
 
 	@Override
 	public String toString() {
-		return "Programa [id=" + id + ", idCliente=" + idCliente + ", cliente=" + cliente + "]";
+		return "Programa [id=" + id + ", idPrograma=" + idPrograma + ", programa=" + programa + "]";
 	}
 
 	public Long getId() {
@@ -56,25 +56,26 @@ public class Programa implements Serializable{
 		this.id = id;
 	}
 
-	public Long getIdCliente() {
-		return idCliente;
+	public Long getIdPrograma() {
+		return idPrograma;
 	}
 
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
+	public void setIdPrograma(Long idPrograma) {
+		this.idPrograma = idPrograma;
 	}
 
-	public String getCliente() {
-		return cliente;
+	public String getPrograma() {
+		return programa;
 	}
 
-	public void setCliente(String cliente) {
-		this.cliente = cliente;
+	public void setPrograma(String programa) {
+		this.programa = programa;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 	
 	
 
