@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.lucas.entity.Acao;
@@ -22,6 +23,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
+@ResponseBody
 @RequestMapping("api/v1")
 @Api(value="API REST ApoioMerchan")
 @CrossOrigin(origins="*")
@@ -31,14 +33,14 @@ public class AcaoController {
 	private AcaoService service;
 	
 	@GetMapping("/acoes")
-	@ApiOperation(value="Retorna as ações")
+	@ApiOperation(value="Retorna as aï¿½ï¿½es")
 	public List<Acao> list(){
 		return service.listAll();
 		
 	}
 	
 	@GetMapping("/acoes/{id}")
-	@ApiOperation(value="Retorna uma ação unica por id")
+	@ApiOperation(value="Retorna uma aï¿½ï¿½o unica por id")
 	public ResponseEntity<Acao> get(@PathVariable Long id){
 		try {
 			Acao acao = service.get(id);
@@ -49,14 +51,15 @@ public class AcaoController {
 	}
 	
 	@PostMapping("/acoes")
-	@ApiOperation(value="Salava um ação")
+	@ApiOperation(value="Salava um aï¿½ï¿½o")
 	public void add(@RequestBody Acao acao) {
 		service.save(acao);
 		System.out.println("gravado com sucesso!");
+		
 	}
 	
 	@PutMapping("/acoes/{id}")
-	@ApiOperation(value="Atualiza uma ação")
+	@ApiOperation(value="Atualiza uma aï¿½ï¿½o")
 	public ResponseEntity<?> update(@RequestBody Acao acao,
 			@PathVariable Long id){
 		try {
@@ -71,7 +74,7 @@ public class AcaoController {
 	}
 	
 	@DeleteMapping("/acoes/{id}")
-	@ApiOperation(value="deleta uma ação")
+	@ApiOperation(value="deleta uma aï¿½ï¿½o")
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
 	}

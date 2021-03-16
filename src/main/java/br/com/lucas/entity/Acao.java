@@ -35,6 +35,7 @@ public class Acao implements Serializable {
 	@Column(name = "programa", length = 100)
 	@JsonProperty("programa")
 	@NotNull
+//	@Pattern(regexp = "[a-z A-Z]{2,100}", message = "Nome somente com letras maisculas")
 	private String programa;
 
 	@Column(name = "data")
