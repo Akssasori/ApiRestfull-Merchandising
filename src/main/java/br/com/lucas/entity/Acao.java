@@ -95,9 +95,9 @@ public class Acao implements Serializable {
 	@JsonFormat(pattern = "HH:mm:ss")
 	private LocalTime duracao;
 
-	@Column(name = "tvAberta")
-	@JsonProperty("tvAberta")
-	private Boolean tvAberta;
+	@Column(name = "canal")
+	@JsonProperty("canal")
+	private String canal;
 
 	public Acao() {
 
@@ -105,7 +105,7 @@ public class Acao implements Serializable {
 
 	public Acao(Long id, String programa, LocalDate data, String cliente, Long idCliente, String produto,
 			String tipoAcao, String descricao, LocalDateTime entrada, LocalDateTime saida, String agencia, String url,
-			Long idAgencia, Boolean tvAberta) {
+			Long idAgencia, String canal) {
 		super();
 		this.id = id;
 		this.programa = programa;
@@ -120,7 +120,7 @@ public class Acao implements Serializable {
 		this.agencia = agencia;
 		this.url = url;
 		this.idAgencia = idAgencia;
-		this.tvAberta = tvAberta;
+		this.canal = canal;
 	}
 
 	@PrePersist
@@ -192,7 +192,7 @@ public class Acao implements Serializable {
 		return "Acao [id=" + id + ", programa=" + programa + ", data=" + data + ", cliente=" + cliente + ", idCliente="
 				+ idCliente + ", produto=" + produto + ", tipoAcao=" + tipoAcao + ", descricao=" + descricao
 				+ ", entrada=" + entrada + ", saida=" + saida + ", agencia=" + agencia + ", url=" + url + ", idAgencia="
-				+ idAgencia + ", duracao=" + duracao + ", tvAberta=" + tvAberta + "]";
+				+ idAgencia + ", duracao=" + duracao + ", canal=" + canal + "]";
 	}
 
 	public Long getId() {
@@ -307,16 +307,18 @@ public class Acao implements Serializable {
 		this.duracao = duracao;
 	}
 
-	public Boolean getTvAberta() {
-		return tvAberta;
+	public String getCanal() {
+		return canal;
 	}
 
-	public void setTvAberta(Boolean tvAberta) {
-		this.tvAberta = tvAberta;
+	public void setCanal(String canal) {
+		this.canal = canal;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	
 
 }
