@@ -194,7 +194,7 @@ public class Acao implements Serializable {
 				+ ", entrada=" + entrada + ", saida=" + saida + ", agencia=" + agencia + ", url=" + url + ", idAgencia="
 				+ idAgencia + ", duracao=" + duracao + ", canal=" + canal + "]";
 	}
-
+//
 	public Long getId() {
 		return id;
 	}
