@@ -18,7 +18,17 @@ public class ProdutoService {
 		return repo.findAll();
 	}
 	
+	public void save(Produto produto) {
+		repo.save(produto);
+	}
 	
+	public Produto get(Long id) {
+		return repo.findById(id).get();
+	}
+	
+	public void delete(Long id) {
+		repo.deleteById(id);
+	}
 	
 
 }

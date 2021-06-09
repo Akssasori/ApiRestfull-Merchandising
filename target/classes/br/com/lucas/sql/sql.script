@@ -1,0 +1,43 @@
+
+CREATE TABLE `acao` ( 
+   `id` INT NOT NULL,
+   `programa` VARCHAR(100) NOT NULL,
+   `idPrograma` INT,
+   `data` DATETIME NOT NULL,
+   `cliente` VARCHAR(100),
+   `idCliente` INT,
+   `produto` VARCHAR(100),
+   `idProduto` INT,
+   `tipoAcao` VARCHAR(100),
+   `descricao` VARCHAR(256),
+   `entrada` DATETIME NOT NULL,
+   `saida` DATETIME NOT NULL,
+   `agencia` VARCHAR(100),
+   `idAgencia` INT,
+   `duracao` DATETIME,
+   `url` TEXT,
+   `canal` VARCHAR(100),
+   `idCanal` INT,
+    PRIMARY KEY (
+   `id`
+    )
+);
+CREATE TABLE `agencia` ( 
+   `id` INT NOT NULL,
+   `agencia` VARCHAR(100),
+   `idAgencia` INT,
+   `acao_id` INT NOT NULL,
+    PRIMARY KEY (
+   `id`
+    )
+);
+ALTER TABLE `agencia` 
+  ADD CONSTRAINT `acao-agencia`
+  FOREIGN KEY ( 
+   `acao_id`
+)   REFERENCES `acao`( 
+   `id`
+) 
+ ON DELETE Cascade
+ ON UPDATE Cascade;
+

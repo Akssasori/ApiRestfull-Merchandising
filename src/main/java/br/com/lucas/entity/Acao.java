@@ -38,6 +38,10 @@ public class Acao implements Serializable {
 //	@Pattern(regexp = "[a-z A-Z]{2,100}", message = "Nome somente com letras maisculas")
 	private String programa;
 
+	@Column(name = "idPrograma")
+	@JsonProperty("idPrograma")
+	private Long idPrograma;
+
 	@Column(name = "data")
 	@JsonProperty("data")
 	@JsonFormat(pattern = "dd-MM-yyyy")
@@ -54,6 +58,10 @@ public class Acao implements Serializable {
 	@Column(name = "produto", length = 100)
 	@JsonProperty("produto")
 	private String produto;
+
+	@Column(name = "idProduto")
+	@JsonProperty("idProduto")
+	private Long idProduto;
 
 	@Column(name = "tipoAcao")
 	@JsonProperty("tipoAcao")
@@ -82,13 +90,13 @@ public class Acao implements Serializable {
 //	@JsonProperty("numeroVideo")
 //	private Long numeroVideo;
 
-	@Column(name = "url")
-	@JsonProperty("url")
-	private String url;
-
 	@Column(name = "idAgencia")
 	@JsonProperty("idAgencia")
 	private Long idAgencia;
+
+	@Column(name = "url")
+	@JsonProperty("url")
+	private String url;
 
 	@Column(name = "duracao")
 	@JsonProperty("duracao")
@@ -103,25 +111,29 @@ public class Acao implements Serializable {
 
 	}
 
-	public Acao(Long id, String programa, LocalDate data, String cliente, Long idCliente, String produto,
-			String tipoAcao, String descricao, LocalDateTime entrada, LocalDateTime saida, String agencia, String url,
-			Long idAgencia, String canal) {
+	public Acao(Long id, String programa, Long idPrograma, LocalDate data, String cliente, Long idCliente,
+			String produto, Long idProduto, String tipoAcao, String descricao, LocalDateTime entrada,
+			LocalDateTime saida, String agencia, Long idAgencia, String url, String canal) {
 		super();
 		this.id = id;
 		this.programa = programa;
+		this.idPrograma = idPrograma;
 		this.data = data;
 		this.cliente = cliente;
 		this.idCliente = idCliente;
 		this.produto = produto;
+		this.idProduto = idProduto;
 		this.tipoAcao = tipoAcao;
 		this.descricao = descricao;
 		this.entrada = entrada;
 		this.saida = saida;
 		this.agencia = agencia;
-		this.url = url;
 		this.idAgencia = idAgencia;
+		this.url = url;
 		this.canal = canal;
 	}
+
+
 
 	@PrePersist
 	public void calculoDiferenca() {
@@ -155,24 +167,23 @@ public class Acao implements Serializable {
 		}
 		timeinhr = (timeinminaux / 60);
 		diferencaSegundos = 0;
-		
 
 //		if (diferencaDias == 0) { foi?
 
-			System.out.println("O tempo é : " + timeinhr + ":" + timeinmin + ":" + timeinsec);
+		System.out.println("O tempo é : " + timeinhr + ":" + timeinmin + ":" + timeinsec);
 
-			int timehr = (int) timeinhr;
-			int timemin = (int) timeinmin;
-			int timesec = (int) timeinsec;
+		int timehr = (int) timeinhr;
+		int timemin = (int) timeinmin;
+		int timesec = (int) timeinsec;
 
-			LocalTime total = LocalTime.of(timehr, timemin, timesec);
-			duracao = total;
+		LocalTime total = LocalTime.of(timehr, timemin, timesec);
+		duracao = total;
 
 //		}
 //		else if (diferencaDias > 0) {
 //			
 //			System.out.println("seu dia e maior que 0");
-			
+
 //			int timehr2 = (int) 24 - start.getHour() + stop.getHour();
 //			int timehr = timehr2;
 //			int timemin = (int) timeinmin;
@@ -180,21 +191,22 @@ public class Acao implements Serializable {
 //			
 //			LocalTime total = LocalTime.of(timehr, timemin, timesec);
 //			duracao = total;
-			
-			
 
 //		}
 
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Acao [id=" + id + ", programa=" + programa + ", data=" + data + ", cliente=" + cliente + ", idCliente="
-				+ idCliente + ", produto=" + produto + ", tipoAcao=" + tipoAcao + ", descricao=" + descricao
-				+ ", entrada=" + entrada + ", saida=" + saida + ", agencia=" + agencia + ", url=" + url + ", idAgencia="
-				+ idAgencia + ", duracao=" + duracao + ", canal=" + canal + "]";
+		return "Acao [id=" + id + ", programa=" + programa + ", idPrograma=" + idPrograma + ", data=" + data
+				+ ", cliente=" + cliente + ", idCliente=" + idCliente + ", produto=" + produto + ", idProduto="
+				+ idProduto + ", tipoAcao=" + tipoAcao + ", descricao=" + descricao + ", entrada=" + entrada
+				+ ", saida=" + saida + ", agencia=" + agencia + ", idAgencia=" + idAgencia + ", url=" + url
+				+ ", duracao=" + duracao + ", canal=" + canal + "]";
 	}
-//
+
 	public Long getId() {
 		return id;
 	}
@@ -209,6 +221,14 @@ public class Acao implements Serializable {
 
 	public void setPrograma(String programa) {
 		this.programa = programa;
+	}
+
+	public Long getIdPrograma() {
+		return idPrograma;
+	}
+
+	public void setIdPrograma(Long idPrograma) {
+		this.idPrograma = idPrograma;
 	}
 
 	public LocalDate getData() {
@@ -241,6 +261,14 @@ public class Acao implements Serializable {
 
 	public void setProduto(String produto) {
 		this.produto = produto;
+	}
+
+	public Long getIdProduto() {
+		return idProduto;
+	}
+
+	public void setIdProduto(Long idProduto) {
+		this.idProduto = idProduto;
 	}
 
 	public String getTipoAcao() {
@@ -283,20 +311,20 @@ public class Acao implements Serializable {
 		this.agencia = agencia;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
 	public Long getIdAgencia() {
 		return idAgencia;
 	}
 
 	public void setIdAgencia(Long idAgencia) {
 		this.idAgencia = idAgencia;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public LocalTime getDuracao() {
@@ -319,6 +347,7 @@ public class Acao implements Serializable {
 		return serialVersionUID;
 	}
 
+	//
 	
 
 }
