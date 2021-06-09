@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -35,7 +36,7 @@ public class Acao implements Serializable {
 	@Column(name = "programa", length = 100)
 	@JsonProperty("programa")
 	@NotNull
-//	@Pattern(regexp = "[a-z A-Z]{2,100}", message = "Nome somente com letras maisculas")
+	@Pattern(regexp = "[A-Z A-Z]{2,100}", message="Nome fora do Padrao")
 	private String programa;
 
 	@Column(name = "idPrograma")

@@ -50,11 +50,25 @@ public class AcaoController {
 		}
 	}
 	
+//	@PostMapping("/acoes")
+//	@ApiOperation(value="Salava um a��o")
+//	public void add(@RequestBody Acao acao) {
+//		service.save(acao);
+//		System.out.println("gravado com sucesso!");
+//		
+//	}
+	
 	@PostMapping("/acoes")
 	@ApiOperation(value="Salava um a��o")
-	public void add(@RequestBody Acao acao) {
-		service.save(acao);
-		System.out.println("gravado com sucesso!");
+	public ResponseEntity<?>add(@RequestBody Acao acao) {
+		try {
+			service.save(acao);
+//			return new ResponseEntity<>(HttpStatus.OK);
+			return ResponseEntity.status(200).body(acao);
+		}catch(NoSuchElementException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(500).body("Erro: "+ e.getMessage());
+		}
 		
 	}
 	
