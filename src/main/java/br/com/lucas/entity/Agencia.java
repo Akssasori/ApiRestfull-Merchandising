@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name= "agencia")
+@Table(name= "agencias")
 public class Agencia implements Serializable {
 
 	

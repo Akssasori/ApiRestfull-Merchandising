@@ -21,7 +21,7 @@ import com.sun.istack.NotNull;
 //import ch.qos.logback.core.util.Duration;
 
 @Entity
-@Table(name = "acao")
+@Table(name = "acoes")
 public class Acao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
