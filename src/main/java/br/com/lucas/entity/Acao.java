@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 
 //import ch.qos.logback.core.util.Duration;
-
+//antes de relacionar
 @Entity
 @Table(name = "acoes")
 public class Acao implements Serializable {
