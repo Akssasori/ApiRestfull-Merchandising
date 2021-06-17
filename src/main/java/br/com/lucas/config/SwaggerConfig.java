@@ -34,7 +34,7 @@ public class SwaggerConfig {
 	private ApiInfo metaInfo() {
 		ApiInfo apiInfo = new ApiInfo(
 				"Apoio Merchan API REST",
-				"API REST de cadastro de ações.",
+				"API REST de cadastro de acoes.",
 				"1.0",
 				"Terms of Service",
 				new Contact("Lucas Diniz", "https://lucas.diniz.com.br",

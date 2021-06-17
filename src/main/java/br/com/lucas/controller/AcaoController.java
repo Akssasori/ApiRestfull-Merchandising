@@ -33,20 +33,24 @@ public class AcaoController {
 	private AcaoService service;
 	
 	@GetMapping("/acoes")
-	@ApiOperation(value="Retorna as a��es")
+	@ApiOperation(value="Retorna a lista de acoes")
 	public List<Acao> list(){
 		return service.listAll();
 		
 	}
 	
 	@GetMapping("/acoes/{id}")
-	@ApiOperation(value="Retorna uma a��o unica por id")
-	public ResponseEntity<Acao> get(@PathVariable Long id){
+	@ApiOperation(value="Retorna uma acao unica por id")
+	public ResponseEntity<?> get(@PathVariable Long id){
 		try {
 			Acao acao = service.get(id);
 			return new ResponseEntity<Acao>(acao,HttpStatus.OK);
 		}catch (NoSuchElementException e) {
-			return new ResponseEntity<Acao>(HttpStatus.NOT_FOUND);
+//			e.printStackTrace();
+//			return new ResponseEntity<Acao>(HttpStatus.NOT_FOUND);
+			return ResponseEntity.status(404).body("Erro: "+ e.getMessage());
+			
+			
 		}
 	}
 	
@@ -59,7 +63,7 @@ public class AcaoController {
 //	}
 	
 	@PostMapping("/acoes")
-	@ApiOperation(value="Salava um a��o")
+	@ApiOperation(value="Salava um acao")
 	public ResponseEntity<?>add(@RequestBody Acao acao) {
 		try {
 			service.save(acao);
@@ -73,7 +77,7 @@ public class AcaoController {
 	}
 	
 	@PutMapping("/acoes/{id}")
-	@ApiOperation(value="Atualiza uma a��o")
+	@ApiOperation(value="Altera uma acao por id")
 	public ResponseEntity<?> update(@RequestBody Acao acao,
 			@PathVariable Long id){
 		try {
@@ -88,7 +92,7 @@ public class AcaoController {
 	}
 	
 	@DeleteMapping("/acoes/{id}")
-	@ApiOperation(value="deleta uma a��o")
+	@ApiOperation(value="deleta uma acao")
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
 	}
